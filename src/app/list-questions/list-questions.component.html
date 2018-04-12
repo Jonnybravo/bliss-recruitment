@@ -1,0 +1,24 @@
+<div>
+    <mat-form-field class="example-form-field">
+        <input matInput type="text" placeholder="Filter List" [(ngModel)]="filter"/>
+        <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+            <span class="mat-button-wrapper"><mat-icon _ngcontent-c35="" class="mat-icon material-icons" role="img" aria-hidden="true">close</mat-icon></span>
+        </button>
+      </mat-form-field>
+      <button mat-raised-button color="primary" (click)="search()">Filter</button>
+
+        <mat-list>
+            <mat-list-item *ngFor="let question of questions">
+              <img matListAvatar src="{{question.thumb_url}}" alt="...">
+              <h3 matLine> {{question.id}} - {{question.question}}</h3>
+              <p matLine>
+                <span> {{getFormattedDate(question.published_at)}} </span>
+              </p>
+              <mat-divider></mat-divider>
+            </mat-list-item>
+          </mat-list>
+
+          <button mat-raised-button color="primary" (click)="search()">Load more ...</button>
+
+</div>
+
