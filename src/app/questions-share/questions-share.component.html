@@ -1,0 +1,9 @@
+<div id="questions-share">
+    <mat-form-field>
+        <input matInput placeholder="Enter an email" [formControl]="email" required>
+        <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+      </mat-form-field>
+    <div class="button-container">
+      <button mat-raised-button color="primary" (click)="sharePage()" [disabled]="isEmailInvalid">Share Page</button>
+    </div>
+</div>

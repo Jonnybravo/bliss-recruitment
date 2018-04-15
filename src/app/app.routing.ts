@@ -1,9 +1,10 @@
 import { Routes, RouterModule } from '@angular/router';
-import { ListQuestionsComponent } from './list-questions/list-questions.component';
+import { QuestionsListComponent } from './questions-list/questions-list.component';
+import { QuestionsDetailComponent } from './questions-detail/questions-detail.component';
 
 const appRoutes: Routes = [
-    { path: 'questions', component: ListQuestionsComponent },
-    { path: 'questions/:question_filter', component: ListQuestionsComponent },
+    { path: 'questions', component: QuestionsListComponent },
+    { path: 'questions/:question_id', component: QuestionsDetailComponent },
     { path: '', redirectTo: '/questions', pathMatch: 'full' }
   ];
 
