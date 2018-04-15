@@ -9,16 +9,14 @@
   <div class="question-container">
     <mat-card class="question-card">
         <mat-card-header>
-          <!-- <div mat-card-avatar class="example-header-image"></div> -->
           <mat-card-title>#{{question.id}} - {{question.question}}</mat-card-title>
-          <!-- <mat-card-subtitle>{{utils.getFormattedDate(question.published_at)}}</mat-card-subtitle> -->
         </mat-card-header>
         <img mat-card-image src="{{question.image_url}}" alt="image">
         <mat-card-content>
           <div class="choice-row" *ngFor="let choice of question.choices; let i = index">
             <label>{{choice.choice}}</label>
             <span>{{choice.votes}}</span>
-            <button mat-raised-button class="accent" (click)="vote(i)">Vote!</button>
+            <button mat-raised-button class="accent" (click)="vote(i)" [disabled]="hasVoted">Vote!</button>
           </div>
           <div class="date">
             <p>

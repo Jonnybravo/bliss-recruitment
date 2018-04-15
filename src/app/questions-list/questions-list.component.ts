@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Observable } from 'rxjs/Rx';
 import { Router } from '@angular/router';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 import { UtilsService } from './../utils/utils';
 
@@ -10,6 +11,7 @@ import { QuestionsService } from './../services/questions.service';
 import { Question } from './../model/question';
 
 import { QuestionsDetailComponent } from './../questions-detail/questions-detail.component';
+import { QuestionsShareComponent } from './../questions-share/questions-share.component';
 
 @Component({
   selector: 'app-questions-list',
@@ -25,7 +27,8 @@ export class QuestionsListComponent implements OnInit {
 
   private noMoreRecords: Boolean;
 
-  constructor(private questionsService: QuestionsService, private route: ActivatedRoute, private router: Router, private utils: UtilsService) {}
+  constructor(private questionsService: QuestionsService, private route: ActivatedRoute, private router: Router,
+    private utils: UtilsService, public dialog: MatDialog) {}
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
@@ -69,5 +72,9 @@ export class QuestionsListComponent implements OnInit {
 
   loadMore(){
     this.listQuestions(this.numQuestions, this.offset + this.numQuestions, this.filter);
+  }
+
+  share(){
+    this.dialog.open(QuestionsShareComponent);
   }
 }

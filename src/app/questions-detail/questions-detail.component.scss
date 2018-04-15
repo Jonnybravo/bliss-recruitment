@@ -2,11 +2,6 @@
   display: flex;
   flex-direction: column;
 
-  .button-container{
-    display: flex;
-    align-items: center;
-  }
-
   .question-container{
     display: flex;
     justify-content: center;
@@ -16,6 +11,7 @@
       .choice-row{
         display: flex;
         align-items: center;
+        justify-content: center;
         padding: 0.7rem 0;
 
         label{

@@ -1,13 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { Http, Response, Headers } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 
 import { Question } from './../model/question';
 
 import { ServerUtilsService } from './server-utils.service';
-
-// const API = "https://private-bbbe9-blissrecruitmentapi.apiary-mock.com";
 
 @Injectable()
 export class QuestionsService {
@@ -20,8 +18,6 @@ export class QuestionsService {
   getQuestions(limit?, offset?, filter?): Observable<Question[]>{
     let data = this.createData(limit, offset, filter);
 
-    console.log(this.serverUtils.createURL(this.serverUtils.API + '/questions', data))
-
     return this.http.get(this.serverUtils.createURL(`${this.serverUtils.API}/questions`, data))
         .map((res:Response)=> res.json());
   }
@@ -32,8 +28,6 @@ export class QuestionsService {
   getQuestion(questionId): Observable<Question>{
     let data = {'question_id': questionId};
 
-    console.log(`${this.serverUtils.API}/questions/${questionId}`)
-
     return this.http.get(`${this.serverUtils.API}/questions/${questionId}`)
         .map((res:Response)=> res.json());
   }
@@ -42,12 +36,22 @@ export class QuestionsService {
   * Votes for a choice on a question
   */
   vote(question): Observable<Question>{
-    //let data = {'question_id': questionId};
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
 
-    console.log(JSON.stringify(question))
+    console.log(`${this.serverUtils.API}/questions/${question.id}`)
+    return this.http.put(`${this.serverUtils.API}/questions/${question.id}`, JSON.stringify(question), {headers: headers})
+        .map((res:Response)=> res.json())
+        .catch(this.handleError);
+  }
 
-    return this.http.put(`${this.serverUtils.API}/questions/${question.questionId}`, JSON.stringify(question))
-        .map((res:Response)=> res.json());
+  private handleError (error: any) {
+    let errMsg = (error.message) ? error.message :
+      error.status ? (error.status) : 'Server error';
+
+    console.error(errMsg); // log to console instead
+
+    return Observable.throw(errMsg);
   }
 
   /*

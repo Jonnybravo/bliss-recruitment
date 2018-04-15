@@ -2,3 +2,9 @@
 
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
+.button-container{
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+}
+

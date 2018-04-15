@@ -3,10 +3,19 @@
   flex-direction: column;
   align-items: center;
 
-  .filter-container{
+  .header-container{
     display: flex;
     flex-direction: row;
     width: 50%;
+    .filter-container{
+      display: flex;
+      flex-direction: row;
+      width: 80%;
+      padding: 0 2rem;
+      .mat-form-field{
+        width: 70%;
+      }
+    }
   }
 
   .list-container{
@@ -17,5 +26,12 @@
 
   .mat-list-item{
     cursor: pointer;
+  }
+
+  .button-container{
+    justify-content: center;
+    button{
+      width: 50%;
+    }
   }
 }

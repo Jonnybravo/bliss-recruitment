@@ -19,7 +19,7 @@ import { QuestionsShareComponent } from './../questions-share/questions-share.co
 export class QuestionsDetailComponent implements OnInit {
 
   private question: Question;
-  //public questionId: Number;
+  private hasVoted: Boolean;
 
   constructor(private questionsService: QuestionsService, private route: ActivatedRoute, private router: Router,
     private utils: UtilsService, public dialog: MatDialog) {
@@ -27,10 +27,8 @@ export class QuestionsDetailComponent implements OnInit {
     this.route.params.subscribe(params=>{
       const questionId = params['question_id'];
 
-
       this.questionsService.getQuestion(questionId).subscribe(
         response => {
-          console.log(response)
           this.question = response;
         }
       );
@@ -45,25 +43,24 @@ export class QuestionsDetailComponent implements OnInit {
     this.router.navigate(['/questions']);
   }
 
-  openDialog() {
-    let dialogRef = this.dialog.open(QuestionsShareComponent, {
-      data: { name: "HOLA", animal: "BATATA" }
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      //this.animal = result;
-    });
+  share() {
+    this.dialog.open(QuestionsShareComponent);
   }
 
   vote(index){
+    this.hasVoted = true;
     let votedQuestion = {};
 
+    const votedChoices = this.question.choices.map((choice) => {
+      return {'choice': choice.choice, 'votes': 0};
+    });
+    votedChoices[index].votes += 1;
+
     Object.assign(votedQuestion, this.question);
+    votedQuestion['choices'] = votedChoices;
 
-    votedQuestion['choices'].forEach((choice) => choice.votes = 0)
-    votedQuestion['choices'][index].votes += 1;
-
-    this.questionsService.vote(votedQuestion);
+    this.questionsService.vote(votedQuestion).subscribe(
+      response => {}
+    );;
   }
 }

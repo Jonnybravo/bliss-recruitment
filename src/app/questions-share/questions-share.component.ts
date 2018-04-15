@@ -13,7 +13,6 @@ import { ServerUtilsService } from './../services/server-utils.service';
 export class QuestionsShareComponent {
 
   email = new FormControl('', [Validators.required, Validators.email]);
-  isEmailInvalid: Boolean = false;
 
   constructor(
     public dialogRef: MatDialogRef<QuestionsShareComponent>,
@@ -28,12 +27,11 @@ export class QuestionsShareComponent {
     const message = this.email.hasError('required') ? 'You must enter an email' :
         this.email.hasError('email') ? 'Not a valid email' : '';
 
-    this.isEmailInvalid = (message === '');
-
     return message;
   }
 
   sharePage(){
     this.serviceUtils.sharePage(this.email.value, window.location.href);
+    this.dialogRef.close();
   }
 }

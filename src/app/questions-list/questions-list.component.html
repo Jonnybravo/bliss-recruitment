@@ -1,21 +1,27 @@
 <div id="question-list">
-
-  <div class="filter-container">
-    <mat-form-field class="example-form-field">
-      <input matInput type="text" placeholder="Filter List" [(ngModel)]="filter" />
-      <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
-        <span class="mat-button-wrapper">
-          <mat-icon _ngcontent-c35="" class="mat-icon material-icons" role="img" aria-hidden="true">close</mat-icon>
-        </span>
-      </button>
-    </mat-form-field>
-    <button mat-raised-button color="primary" (click)="search()">Filter</button>
+  <div class="header-container">
+    <div class="filter-container">
+      <mat-form-field class="example-form-field">
+        <input matInput type="text" placeholder="Filter List" [(ngModel)]="filter" />
+        <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+          <span class="mat-button-wrapper">
+            <mat-icon _ngcontent-c35="" class="mat-icon material-icons" role="img" aria-hidden="true">close</mat-icon>
+          </span>
+        </button>
+      </mat-form-field>
+      <div class="button-container">
+        <button mat-raised-button color="primary" (click)="search()">Filter</button>
+      </div>
+    </div>
+    <div class="button-container">
+      <button mat-raised-button color="primary" (click)="share()">Share</button>
+    </div>
   </div>
 
   <div class="list-container">
     <mat-list>
       <mat-list-item *ngFor="let question of questions" (click)="goToQuestion(question.id)">
-        <img matListAvatar src="{{question.thumb_url}}" alt="...">
+        <img matListAvatar src="{{question.thumb_url}}" alt="thumb">
         <h3 matLine> {{question.id}} - {{question.question}}</h3>
         <p matLine>
           <span> {{utils.getFormattedDate(question.published_at)}} </span>
@@ -24,6 +30,8 @@
       </mat-list-item>
     </mat-list>
 
-    <button mat-raised-button color="primary" (click)="loadMore()" [disabled]="noMoreRecords">Load more ...</button>
+    <div class="button-container">
+      <button mat-raised-button color="primary" (click)="loadMore()" [disabled]="noMoreRecords">Load more ...</button>
+    </div>
   </div>
 </div>
