@@ -1,0 +1,37 @@
+#question-list{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .header-container{
+    display: flex;
+    flex-direction: row;
+    width: 50%;
+    .filter-container{
+      display: flex;
+      flex-direction: row;
+      width: 80%;
+      padding: 0 2rem;
+      .mat-form-field{
+        width: 70%;
+      }
+    }
+  }
+
+  .list-container{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+  }
+
+  .mat-list-item{
+    cursor: pointer;
+  }
+
+  .button-container{
+    justify-content: center;
+    button{
+      width: 50%;
+    }
+  }
+}

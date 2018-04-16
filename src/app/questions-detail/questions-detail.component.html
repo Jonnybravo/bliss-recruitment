@@ -1,0 +1,32 @@
+<div id="question" *ngIf="question">
+  <div class="button-container">
+      <button mat-icon-button (click)="goToList()">
+          <mat-icon aria-label="Example icon-button with a heart icon">arrow_back</mat-icon>
+          Back to questions list
+        </button>
+  </div>
+
+  <div class="question-container">
+    <mat-card class="question-card">
+        <mat-card-header>
+          <mat-card-title>#{{question.id}} - {{question.question}}</mat-card-title>
+        </mat-card-header>
+        <img mat-card-image src="{{question.image_url}}" alt="image">
+        <mat-card-content>
+          <div class="choice-row" *ngFor="let choice of question.choices; let i = index">
+            <label>{{choice.choice}}</label>
+            <span>{{choice.votes}}</span>
+            <button mat-raised-button class="accent" (click)="vote(i)" [disabled]="hasVoted">Vote!</button>
+          </div>
+          <div class="date">
+            <p>
+              This question was published on {{utils.getFormattedDate(question.published_at)}}
+            </p>
+          </div>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button (click)="share()">SHARE</button>
+        </mat-card-actions>
+      </mat-card>
+  </div>
+</div>
