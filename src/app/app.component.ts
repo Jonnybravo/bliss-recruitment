@@ -20,6 +20,9 @@ export class AppComponent implements OnInit {
       console.log(this.loading)
   }
 
+  /*
+  * Checks Angular's events in order to place a loading screen between each page. The server's health is also checked at this time.
+  */
   ngOnInit() {
       this.router.events
           .subscribe((event) => {
@@ -33,7 +36,6 @@ export class AppComponent implements OnInit {
 
                     this.serviceUtils.checkServerHealth().subscribe(
                       response => {
-                          //response.status = "ol"
                         if(response.status !== "OK")
                           this.retry = true;
                         else{
@@ -48,6 +50,9 @@ export class AppComponent implements OnInit {
           });
   }
 
+  /*
+  * Reloads the page
+  */
   reload(){
     window.location.reload();
   }

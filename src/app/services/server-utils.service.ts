@@ -12,11 +12,17 @@ export class ServerUtilsService {
 
   constructor(private http: Http) { }
 
+  /*
+  * Checks the server health
+  */
   checkServerHealth() {
     return this.http.get(`${this.API}/health`)
         .map((res:Response)=> res.json());
   }
 
+  /*
+  * Shares a page to the specified email
+  */
   sharePage(email, page) {
     let data = this.createData(email, page);
 

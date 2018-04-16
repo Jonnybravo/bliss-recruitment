@@ -35,18 +35,25 @@ export class QuestionsDetailComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
+  ngOnInit() {}
 
-  }
-
+  /*
+  * Navigates to the list page
+  */
   goToList(){
     this.router.navigate(['/questions']);
   }
 
+  /*
+  * Opens the dialog box provided by the QuestionsShareComponent
+  */
   share() {
     this.dialog.open(QuestionsShareComponent);
   }
 
+  /*
+  * Creates a copy of the question object in order to only send only the correct vote
+  */
   vote(index){
     this.hasVoted = true;
     let votedQuestion = {};

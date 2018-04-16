@@ -30,8 +30,10 @@ export class QuestionsListComponent implements OnInit {
   constructor(private questionsService: QuestionsService, private route: ActivatedRoute, private router: Router,
     private utils: UtilsService, public dialog: MatDialog) {}
 
+  /*
+  * Verifies the query string parameters and decides to navigate to a specific question page or to fetch a filtered list
+  */
   ngOnInit() {
-    console.log("ola")
     this.route.queryParams.subscribe(params => {
       this.filter = params['question_filter'];
 
@@ -44,6 +46,9 @@ export class QuestionsListComponent implements OnInit {
     });
   }
 
+  /*
+  * Calls the service to fetch the questions
+  */
   listQuestions(questionsNumber?, questionsOffset?, questionsFilter?){
     this.questionsService.getQuestions(questionsNumber, questionsOffset, questionsFilter).subscribe(
       response => {
@@ -55,6 +60,9 @@ export class QuestionsListComponent implements OnInit {
     )
   }
 
+  /*
+  * Updates the URL and calls listQuestions
+  */
   search(){
     this.router.navigate([], {
       relativeTo: this.route,
@@ -67,14 +75,24 @@ export class QuestionsListComponent implements OnInit {
     this.listQuestions(this.numQuestions, this.offset, this.filter);
   }
 
+  /*
+  * Navigates to a specific question
+  */
   goToQuestion(questionId){
     this.router.navigate(['/questions', questionId]);
   }
 
+  /*
+  * Loads more questions
+  */
   loadMore(){
-    this.listQuestions(this.numQuestions, this.offset + this.numQuestions, this.filter);
+    this.offset += this.numQuestions;
+    this.listQuestions(this.numQuestions, this.offset, this.filter);
   }
 
+  /*
+  * Opens the dialog box provided by the QuestionsShareComponent
+  */
   share(){
     this.dialog.open(QuestionsShareComponent);
   }

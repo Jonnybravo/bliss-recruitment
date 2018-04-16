@@ -23,6 +23,9 @@ export class QuestionsShareComponent {
     this.dialogRef.close();
   }
 
+  /*
+  * Validates if the inserted email is valid
+  */
   getErrorMessage() {
     const message = this.email.hasError('required') ? 'You must enter an email' :
         this.email.hasError('email') ? 'Not a valid email' : '';
@@ -30,6 +33,9 @@ export class QuestionsShareComponent {
     return message;
   }
 
+  /*
+  * Calls the service to share a page and closes the dialog
+  */
   sharePage(){
     this.serviceUtils.sharePage(this.email.value, window.location.href);
     this.dialogRef.close();
