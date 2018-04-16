@@ -31,6 +31,7 @@ export class QuestionsListComponent implements OnInit {
     private utils: UtilsService, public dialog: MatDialog) {}
 
   ngOnInit() {
+    console.log("ola")
     this.route.queryParams.subscribe(params => {
       this.filter = params['question_filter'];
 

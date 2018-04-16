@@ -13,15 +13,14 @@ export class ServerUtilsService {
   constructor(private http: Http) { }
 
   checkServerHealth() {
-
+    return this.http.get(`${this.API}/health`)
+        .map((res:Response)=> res.json());
   }
 
   sharePage(email, page) {
     let data = this.createData(email, page);
 
-    console.log(this.createURL(this.API + '/questions', data))
-
-    return this.http.get(this.createURL(this.API + '/questions', data))
+    return this.http.get(this.createURL(`${this.API}/questions`, data))
         .map((res:Response)=> res.json());
   }
 

@@ -1,5 +1,15 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div>
-  <router-outlet></router-outlet>
+<div class="app-layout">
+    <div *ngIf="loading" class="loader">
+      <mat-spinner></mat-spinner>
+      <div class="retry" *ngIf="retry">
+        The server is not responding. Do you want to
+        <div class="button-container">
+          <button mat-raised-button color="primary" (click)="reload()">retry?</button>
+        </div>
+      </div>
+    </div>
+    <div [hidden]="loading" class="router-output">
+      <router-outlet></router-outlet>
+    </div>
 </div>
 

@@ -61,6 +61,6 @@ export class QuestionsDetailComponent implements OnInit {
 
     this.questionsService.vote(votedQuestion).subscribe(
       response => {}
-    );;
+    );
   }
 }
